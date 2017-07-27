@@ -124,6 +124,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     // offset view by the height of the keyboard
     func keyboardWillShow(_ notification: Notification) {
+        
+        // check if view has already been repositioned
+        // check if top textfield is currently being edited
         if view.frame.origin.y == 0 && (self.activeTextFeild! != topTextField){
             view.frame.origin.y -= getKeyboardHeight(notification)
         }
