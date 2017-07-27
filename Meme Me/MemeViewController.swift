@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MemeViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraBarButton: UIBarButtonItem!
@@ -36,9 +36,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cameraBarButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         configureTextFields(textField: self.topTextField, string: "TOP")
         configureTextFields(textField: self.bottomTextField, string: "BOTTOM")
+        
+        self.shareButton.isEnabled = false
     }
     
     func configureTextFields(textField: UITextField, string: String) {
@@ -51,6 +52,7 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotificaiton()
+        cameraBarButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -147,6 +149,10 @@ class ViewController: UIViewController {
         return true
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     // toggle visibility nav and toolbar
     func toggleBars(on: Bool) {
         self.barsVisible = !on
@@ -175,7 +181,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITextFieldDelegate {
+extension MemeViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -192,12 +198,13 @@ extension ViewController: UITextFieldDelegate {
     }
 }
 
-extension ViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+extension MemeViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage  {
             self.imageView.image = image
             self.imageView.contentMode = UIViewContentMode.scaleAspectFit
+            self.shareButton.isEnabled = true
         }
         dismiss(animated: true, completion: nil)
     }

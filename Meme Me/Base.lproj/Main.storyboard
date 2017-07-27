@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Meme View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Meme_Me" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MemeViewController" customModule="Meme_Me" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Oqk-2P-Dr0">
-                                <rect key="frame" x="0.0" y="153" width="414" height="430"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </imageView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1iU-mU-5SU">
                                 <rect key="frame" x="0.0" y="692" width="414" height="44"/>
@@ -81,12 +81,12 @@
                             <constraint firstItem="Go9-MC-Qn8" firstAttribute="centerX" secondItem="Oqk-2P-Dr0" secondAttribute="centerX" id="ClB-DJ-l1z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Pto-nk-ZCJ" secondAttribute="trailing" id="Iaw-Mq-LPr"/>
                             <constraint firstAttribute="trailing" secondItem="1iU-mU-5SU" secondAttribute="trailing" id="K6i-0n-zNd"/>
-                            <constraint firstItem="Oqk-2P-Dr0" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="133" id="P0y-91-DwR"/>
+                            <constraint firstItem="Oqk-2P-Dr0" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="P0y-91-DwR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Oqk-2P-Dr0" secondAttribute="trailing" constant="-20" id="QOi-im-929"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Oqk-2P-Dr0" secondAttribute="bottom" constant="153" id="Zdz-Kv-uel"/>
-                            <constraint firstItem="Oqk-2P-Dr0" firstAttribute="top" secondItem="Go9-MC-Qn8" secondAttribute="bottom" constant="7" id="e8o-22-4Z6"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Oqk-2P-Dr0" secondAttribute="bottom" id="Zdz-Kv-uel"/>
+                            <constraint firstItem="Oqk-2P-Dr0" firstAttribute="top" secondItem="Go9-MC-Qn8" secondAttribute="bottom" constant="-146" id="e8o-22-4Z6"/>
                             <constraint firstItem="bUc-Q5-i0t" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gWt-mU-Sbu"/>
-                            <constraint firstItem="Pto-nk-ZCJ" firstAttribute="top" secondItem="Oqk-2P-Dr0" secondAttribute="bottom" constant="8" id="gj9-2w-NLW"/>
+                            <constraint firstItem="Pto-nk-ZCJ" firstAttribute="top" secondItem="Oqk-2P-Dr0" secondAttribute="bottom" constant="-145" id="gj9-2w-NLW"/>
                             <constraint firstItem="Pto-nk-ZCJ" firstAttribute="centerX" secondItem="Oqk-2P-Dr0" secondAttribute="centerX" id="hcc-kB-Ktg"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Go9-MC-Qn8" secondAttribute="leading" id="oYK-Dc-016"/>
                             <constraint firstItem="Oqk-2P-Dr0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="pI3-HV-nOQ"/>
@@ -106,7 +106,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="136.23188405797103" y="138.58695652173915"/>
         </scene>
     </scenes>
 </document>
