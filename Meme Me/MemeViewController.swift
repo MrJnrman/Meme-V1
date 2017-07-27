@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MemeViewController.swift
 //  Meme Me
 //
 //  Created by Jamel Reid  on 7/26/17.
@@ -93,7 +93,7 @@ class MemeViewController: UIViewController {
         // check if view has already been repositioned
         // check if top textfield is currently being edited
         if view.frame.origin.y == 0 && (self.activeTextFeild! != topTextField){
-            view.frame.origin.y -= getKeyboardHeight(notification)
+            view.frame.origin.y = getKeyboardHeight(notification) * (-1)
         }
     }
     
