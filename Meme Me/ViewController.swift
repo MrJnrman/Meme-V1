@@ -29,7 +29,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         NSStrokeColorAttributeName: UIColor.black,
         NSForegroundColorAttributeName: UIColor.white,
         NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSStrokeWidthAttributeName: -3.00]
+        NSStrokeWidthAttributeName: 3.00]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,7 +120,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     // offset view by the height of the keyboard
     func keyboardWillShow(_ notification: Notification) {
-        view.frame.origin.y -= getKeyboardHeight(notification)
+        if view.frame.origin.y == 0 {
+            view.frame.origin.y -= getKeyboardHeight(notification)
+        }
     }
     
     // return the position of the view to normal
