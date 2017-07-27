@@ -60,6 +60,7 @@
                                 <items>
                                     <navigationItem id="hx4-ZY-fy1">
                                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="62F-u5-k9t">
+                                            <inset key="imageInsets" minX="0.0" minY="10" maxX="0.0" maxY="0.0"/>
                                             <connections>
                                                 <action selector="shareButtonPressed:" destination="BYZ-38-t0r" id="uPc-t5-UPX"/>
                                             </connections>
