@@ -31,7 +31,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         NSStrokeColorAttributeName: UIColor.black,
         NSForegroundColorAttributeName: UIColor.white,
         NSFontAttributeName: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSStrokeWidthAttributeName: 3.00]
+        NSStrokeWidthAttributeName: -3.00]
     
     override func viewDidLoad() {
         super.viewDidLoad()
