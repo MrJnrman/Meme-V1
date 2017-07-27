@@ -56,11 +56,13 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bUc-Q5-i0t">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="NOG-As-kLu"/>
+                                </constraints>
                                 <items>
                                     <navigationItem id="hx4-ZY-fy1">
                                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="62F-u5-k9t">
-                                            <inset key="imageInsets" minX="0.0" minY="10" maxX="0.0" maxY="-5"/>
                                             <connections>
                                                 <action selector="shareButtonPressed:" destination="BYZ-38-t0r" id="uPc-t5-UPX"/>
                                             </connections>
