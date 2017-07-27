@@ -19,6 +19,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBOutlet weak var navBar: UINavigationBar!
     
     var memedImage: UIImage!
+    var activeTextFeild: UITextField?
+    
     var meme: Meme!
     
     var barsVisible = false
@@ -96,6 +98,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
+        self.activeTextFeild = textField
+        
         if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
         }
@@ -120,7 +124,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     // offset view by the height of the keyboard
     func keyboardWillShow(_ notification: Notification) {
-        if view.frame.origin.y == 0 {
+        if view.frame.origin.y == 0 && (self.activeTextFeild! != topTextField){
             view.frame.origin.y -= getKeyboardHeight(notification)
         }
     }
