@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraBarButton: UIBarButtonItem!
@@ -37,21 +37,15 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         super.viewDidLoad()
         
         cameraBarButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
-        configureTextFields()
+        configureTextFields(textField: self.topTextField, string: "TOP")
+        configureTextFields(textField: self.bottomTextField, string: "BOTTOM")
     }
     
-    func configureTextFields() {
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
-        
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        
-        topTextField.delegate = self
-        bottomTextField.delegate = self
-        
-        topTextField.textAlignment = NSTextAlignment.center
-        bottomTextField.textAlignment = NSTextAlignment.center
+    func configureTextFields(textField: UITextField, string: String) {
+        textField.text = string
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.delegate = self
+        textField.textAlignment = NSTextAlignment.center
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,50 +58,19 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         unsubscribeFromKeyboardNotification()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
     @IBAction func albumPressed(_ sender: Any) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        self.present(imagePickerController, animated: true, completion: nil)
+        presentImagePickerController(sourceType: .photoLibrary)
     }
     
     @IBAction func cameraPressed(_ sender: Any) {
+        presentImagePickerController(sourceType: .camera)
+    }
+    
+    func presentImagePickerController(sourceType: UIImagePickerControllerSourceType) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.sourceType = .camera
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage  {
-            self.imageView.image = image
-            self.imageView.contentMode = UIViewContentMode.scaleAspectFill
-        }
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        self.activeTextFeild = textField
-        
-        if textField.text == "TOP" || textField.text == "BOTTOM" {
-            textField.text = ""
-        }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+        imagePickerController.sourceType = sourceType
+        self.present(imagePickerController, animated: true, completion: nil)
     }
     
     // Setup subscription to keybord events(show/hide)
@@ -147,7 +110,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     // Perform Screen capture
     func generateMemedImage() -> UIImage {
         
-        toggleBars()
+        toggleBars(on: self.barsVisible)
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -155,26 +118,40 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         let memedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         
-        toggleBars()
+        toggleBars(on: self.barsVisible)
         
         return memedImage
     }
     
     func save(memedImage: UIImage) {
         // Create the meme
-        meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
+        if checkMemeParameters() {
+            meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
+        }
+    }
+    
+    func checkMemeParameters() -> Bool {
+        
+        if (topTextField.text) == nil {
+            return false
+        }
+        
+        if (bottomTextField.text) == nil {
+            return false
+        }
+        
+        if (imageView.image) == nil {
+            return false
+        }
+        
+        return true
     }
     
     // toggle visibility nav and toolbar
-    func toggleBars() {
-        if barsVisible {
-            barsVisible = false
-        } else {
-            barsVisible = true
-        }
-        
-        self.toolBar.isHidden = barsVisible
-        self.navBar.isHidden = barsVisible
+    func toggleBars(on: Bool) {
+        self.barsVisible = !on
+        self.toolBar.isHidden = !on
+        self.navBar.isHidden = !on
     }
     
     @IBAction func shareButtonPressed(_ sender: Any) {
@@ -184,10 +161,49 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             memedImage = generateMemedImage()
             let activityController = UIActivityViewController(activityItems: [memedImage], applicationActivities: nil)
             
-            self.present(activityController, animated: true, completion: { () in
+            self.present(activityController, animated: true, completion: nil)
+            
+            activityController.completionWithItemsHandler = { activityController, success, items, error in
+                
+                if !success {
+                    return
+                }
+                
                 self.save(memedImage: self.memedImage)
-            })
+            }
         }
+    }
+}
+
+extension ViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        self.activeTextFeild = textField
+        
+        if textField.text == "TOP" || textField.text == "BOTTOM" {
+            textField.text = ""
+        }
+    }
+}
+
+extension ViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage  {
+            self.imageView.image = image
+            self.imageView.contentMode = UIViewContentMode.scaleAspectFit
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
