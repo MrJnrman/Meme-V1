@@ -11,14 +11,18 @@ import UIKit
 class MemeTableViewController: UITableViewController {
     
     var memes: [Meme]!
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        memes = appDelegate.memes
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        memes = appDelegate.memes
+        self.tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -28,6 +32,20 @@ class MemeTableViewController: UITableViewController {
         
     }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MemeTableViewCell") as! MemeTableViewCell
+        cell.memeImageView?.image = memes[indexPath.row].memedImage
+        cell.nameLabel?.text = "\(memes[indexPath.row].topText!)...\(memes[indexPath.row].bottomText!)"
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "MemeDetailView") as! DetailViewController
+        detailVC.meme = self.memes[indexPath.row]
+        
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
     
     
 }

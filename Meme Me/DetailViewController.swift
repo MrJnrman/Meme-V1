@@ -21,6 +21,11 @@ class DetailViewController: UIViewController {
         
         let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editPressed))
         self.navigationItem.setRightBarButton(editButton, animated: true)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
     }
 
     func editPressed() {

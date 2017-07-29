@@ -40,8 +40,6 @@ class MemeViewController: UIViewController {
         configureTextFields(textField: self.bottomTextField, string: "BOTTOM")
         
         self.shareButton.isEnabled = false
-        self.tabBarController?.tabBar.isHidden = true
-        self.navigationController?.navigationBar.isHidden = true
     }
     
     func configureTextFields(textField: UITextField, string: String) {
@@ -55,6 +53,17 @@ class MemeViewController: UIViewController {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotificaiton()
         cameraBarButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        toggleNavAndTabBars(on: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        toggleNavAndTabBars(on: false)
+    }
+    
+    func toggleNavAndTabBars(on: Bool) {
+        self.tabBarController?.tabBar.isHidden = on
+        self.navigationController?.navigationBar.isHidden = on
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -135,6 +144,9 @@ class MemeViewController: UIViewController {
             let object = UIApplication.shared.delegate
             let appDelegate = object as! AppDelegate
             appDelegate.memes.append(meme)
+            
+            print("added")
+            
         }
     }
     
@@ -182,6 +194,7 @@ class MemeViewController: UIViewController {
                 }
                 
                 self.save(memedImage: self.memedImage)
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }
