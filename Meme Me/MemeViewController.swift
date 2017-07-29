@@ -21,7 +21,7 @@ class MemeViewController: UIViewController {
     var memedImage: UIImage!
     var activeTextFeild: UITextField?
     
-    var meme: Meme!
+    
     
     var barsVisible = false
 
@@ -40,6 +40,8 @@ class MemeViewController: UIViewController {
         configureTextFields(textField: self.bottomTextField, string: "BOTTOM")
         
         self.shareButton.isEnabled = false
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     func configureTextFields(textField: UITextField, string: String) {
@@ -58,6 +60,7 @@ class MemeViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotification()
+        self.tabBarController?.tabBar.isHidden = false
     }
 
     @IBAction func albumPressed(_ sender: Any) {
@@ -128,7 +131,10 @@ class MemeViewController: UIViewController {
     func save(memedImage: UIImage) {
         // Create the meme
         if checkMemeParameters() {
-            meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
+            let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
+            let object = UIApplication.shared.delegate
+            let appDelegate = object as! AppDelegate
+            appDelegate.memes.append(meme)
         }
     }
     
@@ -213,4 +219,5 @@ extension MemeViewController: UINavigationControllerDelegate, UIImagePickerContr
         dismiss(animated: true, completion: nil)
     }
 }
+
 
