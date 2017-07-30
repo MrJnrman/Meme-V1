@@ -20,8 +20,7 @@ class MemeViewController: UIViewController {
     
     var memedImage: UIImage!
     var activeTextFeild: UITextField?
-    
-    
+    var editMeme: Meme!
     
     var barsVisible = false
 
@@ -36,10 +35,20 @@ class MemeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureTextFields(textField: self.topTextField, string: "TOP")
-        configureTextFields(textField: self.bottomTextField, string: "BOTTOM")
-        
-        self.shareButton.isEnabled = false
+        if let meme = editMeme {
+            configureViews(top: meme.topText, bottom: meme.bottomText, image: meme.originalImage, share: true)
+        } else {
+            configureViews(top: "TOP", bottom: "BOTTOM", image: nil, share: false)
+        }
+    }
+    
+    func configureViews(top: String, bottom: String, image: UIImage?, share: Bool){
+        configureTextFields(textField: self.topTextField, string: top)
+        configureTextFields(textField: self.bottomTextField, string: bottom)
+        self.shareButton.isEnabled = share
+        if let unwrappedImage = image {
+            imageView.image = unwrappedImage
+        }
     }
     
     func configureTextFields(textField: UITextField, string: String) {
@@ -60,7 +69,6 @@ class MemeViewController: UIViewController {
         super.viewWillDisappear(animated)
         toggleNavAndTabBars(on: false)
         unsubscribeFromKeyboardNotification()
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     func toggleNavAndTabBars(on: Bool) {
@@ -140,9 +148,6 @@ class MemeViewController: UIViewController {
             let object = UIApplication.shared.delegate
             let appDelegate = object as! AppDelegate
             appDelegate.memes.append(meme)
-            
-            print("added")
-            
         }
     }
     

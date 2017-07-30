@@ -14,9 +14,15 @@ class MemeTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let appDelegate = getAppDelegate()
         memes = appDelegate.memes
+        toggleNavAndTabBars(on: false)
         self.tableView.reloadData()
+    }
+    
+    func toggleNavAndTabBars(on: Bool) {
+        self.tabBarController?.tabBar.isHidden = on
+        self.navigationController?.navigationBar.isHidden = on
     }
 
     // MARK: - Table view data source
@@ -39,6 +45,24 @@ class MemeTableViewController: UITableViewController {
         
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
+    
+    func getAppDelegate() -> AppDelegate {
+        let object = UIApplication.shared.delegate
+        return object as! AppDelegate
+    
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete", handler: { (action, indexPath) in
+            let appDelegate = self.getAppDelegate()
+            appDelegate.memes.remove(at: indexPath.row)
+            self.memes.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
+        })
+        
+        return [deleteAction]
+    }
+    
     
     
 }

@@ -29,7 +29,9 @@ class DetailViewController: UIViewController {
     }
 
     func editPressed() {
-        
+        let memeViewController = self.storyboard?.instantiateViewController(withIdentifier: "MemeViewController") as! MemeViewController
+        memeViewController.editMeme = meme
+        self.navigationController?.pushViewController(memeViewController, animated: true)
     }
 
 }
