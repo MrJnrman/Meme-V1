@@ -205,13 +205,13 @@
                                 </items>
                             </toolbar>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Go9-MC-Qn8" userLabel="Top TextField">
-                                <rect key="frame" x="16" y="160" width="343" height="30"/>
+                                <rect key="frame" x="16" y="134" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="28"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pto-nk-ZCJ" userLabel="Bottom Text Field">
-                                <rect key="frame" x="16" y="473" width="343" height="30"/>
+                                <rect key="frame" x="16" y="494" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="28"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
@@ -239,7 +239,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Go9-MC-Qn8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="96" id="3Ep-0A-8NC"/>
+                            <constraint firstItem="Go9-MC-Qn8" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="70" id="3Ep-0A-8NC"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="1iU-mU-5SU" secondAttribute="bottom" id="5Bq-qM-Ke1"/>
                             <constraint firstItem="Oqk-2P-Dr0" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" constant="49" id="6cY-al-nry"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Go9-MC-Qn8" secondAttribute="trailing" id="8MX-hj-Oaq"/>
@@ -250,7 +250,7 @@
                             <constraint firstItem="Oqk-2P-Dr0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="HWE-gW-a6j"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Pto-nk-ZCJ" secondAttribute="trailing" id="Iaw-Mq-LPr"/>
                             <constraint firstAttribute="trailing" secondItem="1iU-mU-5SU" secondAttribute="trailing" id="K6i-0n-zNd"/>
-                            <constraint firstItem="1iU-mU-5SU" firstAttribute="top" secondItem="Pto-nk-ZCJ" secondAttribute="bottom" constant="71" id="UEt-k0-rS0"/>
+                            <constraint firstItem="1iU-mU-5SU" firstAttribute="top" secondItem="Pto-nk-ZCJ" secondAttribute="bottom" constant="50" id="UEt-k0-rS0"/>
                             <constraint firstItem="Oqk-2P-Dr0" firstAttribute="leading" secondItem="1iU-mU-5SU" secondAttribute="leading" id="ebd-QE-YUo"/>
                             <constraint firstItem="bUc-Q5-i0t" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gWt-mU-Sbu"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Go9-MC-Qn8" secondAttribute="leading" id="oYK-Dc-016"/>

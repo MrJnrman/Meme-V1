@@ -19,7 +19,6 @@ class MemeViewController: UIViewController {
     @IBOutlet weak var navBar: UINavigationBar!
     
     var memedImage: UIImage!
-    var activeTextFeild: UITextField?
     var editMeme: Meme!
     
     var barsVisible = false
@@ -108,7 +107,7 @@ class MemeViewController: UIViewController {
         
         // check if view has already been repositioned
         // check if top textfield is currently being edited
-        if view.frame.origin.y == 0 && (self.activeTextFeild! != topTextField){
+        if view.frame.origin.y == 0 && topTextfield.isEditing {
             view.frame.origin.y = getKeyboardHeight(notification) * (-1)
         }
     }
@@ -214,8 +213,6 @@ extension MemeViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        
-        self.activeTextFeild = textField
         
         if textField.text == "TOP" || textField.text == "BOTTOM" {
             textField.text = ""
