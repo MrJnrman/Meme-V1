@@ -29,7 +29,7 @@ class DetailViewController: UIViewController {
     }
 
     func editPressed() {
-        print("Works!")
+        
     }
 
 }

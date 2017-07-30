@@ -11,12 +11,6 @@ import UIKit
 class MemeTableViewController: UITableViewController {
     
     var memes: [Meme]!
-
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -29,7 +23,6 @@ class MemeTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return memes.count
-        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

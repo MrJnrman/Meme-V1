@@ -59,17 +59,13 @@ class MemeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         toggleNavAndTabBars(on: false)
+        unsubscribeFromKeyboardNotification()
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func toggleNavAndTabBars(on: Bool) {
         self.tabBarController?.tabBar.isHidden = on
         self.navigationController?.navigationBar.isHidden = on
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        unsubscribeFromKeyboardNotification()
-        self.tabBarController?.tabBar.isHidden = false
     }
 
     @IBAction func albumPressed(_ sender: Any) {
@@ -198,6 +194,11 @@ class MemeViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func cancelPressed(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
 }
 
 extension MemeViewController: UITextFieldDelegate {

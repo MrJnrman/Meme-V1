@@ -72,10 +72,13 @@
                     <navigationItem key="navigationItem" id="gHY-md-VPi">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="YAg-8L-ygY">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="O6U-q2-pD0"/>
+                                <segue destination="BYZ-38-t0r" kind="show" id="HzQ-gR-gbO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="PAp-ee-D6r" kind="show" id="hJb-4e-5A7"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="umd-Xt-EXX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -96,7 +99,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HpM-lB-4L0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1330" y="390"/>
+            <point key="canvasLocation" x="-1330" y="448"/>
         </scene>
         <!--Item-->
         <scene sceneID="QXh-vJ-q4f">
@@ -149,14 +152,17 @@
                     <navigationItem key="navigationItem" id="uyu-dN-FED">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="5Il-RV-ZFX">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="Wcw-Vw-400"/>
+                                <segue destination="BYZ-38-t0r" kind="show" id="AFd-jW-8FG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="PAp-ee-D6r" kind="show" id="AU9-RC-wlM"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rJ6-He-8cB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-400.00000000000006" y="389.67391304347831"/>
+            <point key="canvasLocation" x="-400" y="448"/>
         </scene>
         <!--Meme View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -215,6 +221,11 @@
                                                 <action selector="shareButtonPressed:" destination="BYZ-38-t0r" id="uPc-t5-UPX"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="XuL-wT-Uke">
+                                            <connections>
+                                                <action selector="cancelPressed:" destination="BYZ-38-t0r" id="Lbv-gi-IeP"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -251,7 +262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1557.9710144927537" y="23.64130434782609"/>
+            <point key="canvasLocation" x="722" y="448"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lWw-yu-DdL">
@@ -301,7 +312,59 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ucv-fn-Tq8" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="385" y="-785"/>
+            <point key="canvasLocation" x="722" y="-286"/>
+        </scene>
+        <!--Meme View Controller-->
+        <scene sceneID="jjb-tV-d17">
+            <objects>
+                <viewController id="nBv-IZ-y9d" customClass="MemeViewController" customModule="Meme_Me" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="brs-cL-RRo"/>
+                        <viewControllerLayoutGuide type="bottom" id="ayx-h9-uMG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QBp-6j-7AX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ou8-Oa-8XX">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hl7-nI-Rzl" userLabel="Top TextField">
+                                <rect key="frame" x="20" y="116" width="374" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="28"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yBW-e0-W7n" userLabel="Bottom Text Field">
+                                <rect key="frame" x="20" y="591" width="374" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="ArialHebrew" family="Arial Hebrew" pointSize="28"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ayx-h9-uMG" firstAttribute="top" secondItem="yBW-e0-W7n" secondAttribute="bottom" constant="115" id="2WO-WP-Uv1"/>
+                            <constraint firstItem="hl7-nI-Rzl" firstAttribute="top" secondItem="brs-cL-RRo" secondAttribute="bottom" constant="96" id="Az0-sT-qaR"/>
+                            <constraint firstItem="Ou8-Oa-8XX" firstAttribute="centerX" secondItem="hl7-nI-Rzl" secondAttribute="centerX" id="BCo-Q2-xzV"/>
+                            <constraint firstItem="hl7-nI-Rzl" firstAttribute="leading" secondItem="yBW-e0-W7n" secondAttribute="leading" id="Bml-ak-fym"/>
+                            <constraint firstItem="Ou8-Oa-8XX" firstAttribute="leading" secondItem="QBp-6j-7AX" secondAttribute="leading" id="Msb-0P-IIU"/>
+                            <constraint firstItem="Ou8-Oa-8XX" firstAttribute="centerX" secondItem="yBW-e0-W7n" secondAttribute="centerX" id="VkP-EJ-qnb"/>
+                            <constraint firstItem="hl7-nI-Rzl" firstAttribute="leading" secondItem="QBp-6j-7AX" secondAttribute="leadingMargin" id="W88-eH-nWG"/>
+                            <constraint firstItem="Ou8-Oa-8XX" firstAttribute="top" secondItem="QBp-6j-7AX" secondAttribute="top" id="ka3-04-Tqn"/>
+                            <constraint firstItem="Ou8-Oa-8XX" firstAttribute="bottom" secondItem="ayx-h9-uMG" secondAttribute="top" id="o2t-yA-kBV"/>
+                            <constraint firstItem="hl7-nI-Rzl" firstAttribute="trailing" secondItem="QBp-6j-7AX" secondAttribute="trailingMargin" id="qC7-ge-yUv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomTextField" destination="yBW-e0-W7n" id="Gjn-5A-lVq"/>
+                        <outlet property="imageView" destination="Ou8-Oa-8XX" id="cN3-U2-ieX"/>
+                        <outlet property="topTextField" destination="hl7-nI-Rzl" id="vxo-dF-Hlw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6FG-Yr-A8y" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1663.7681159420292" y="-286.14130434782612"/>
         </scene>
     </scenes>
     <resources>
@@ -309,6 +372,7 @@
         <image name="table_30x30" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O6U-q2-pD0"/>
+        <segue reference="HzQ-gR-gbO"/>
+        <segue reference="AU9-RC-wlM"/>
     </inferredMetricsTieBreakers>
 </document>
