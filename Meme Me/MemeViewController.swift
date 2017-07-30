@@ -20,8 +20,7 @@ class MemeViewController: UIViewController {
     
     var memedImage: UIImage!
     var activeTextFeild: UITextField?
-    
-    var meme: Meme!
+    var editMeme: Meme!
     
     var barsVisible = false
 
@@ -36,10 +35,20 @@ class MemeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureTextFields(textField: self.topTextField, string: "TOP")
-        configureTextFields(textField: self.bottomTextField, string: "BOTTOM")
-        
-        self.shareButton.isEnabled = false
+        if let meme = editMeme {
+            configureViews(top: meme.topText, bottom: meme.bottomText, image: meme.originalImage, share: true)
+        } else {
+            configureViews(top: "TOP", bottom: "BOTTOM", image: nil, share: false)
+        }
+    }
+    
+    func configureViews(top: String, bottom: String, image: UIImage?, share: Bool){
+        configureTextFields(textField: self.topTextField, string: top)
+        configureTextFields(textField: self.bottomTextField, string: bottom)
+        self.shareButton.isEnabled = share
+        if let unwrappedImage = image {
+            imageView.image = unwrappedImage
+        }
     }
     
     func configureTextFields(textField: UITextField, string: String) {
@@ -53,11 +62,18 @@ class MemeViewController: UIViewController {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotificaiton()
         cameraBarButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        toggleNavAndTabBars(on: true)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        toggleNavAndTabBars(on: false)
         unsubscribeFromKeyboardNotification()
+    }
+    
+    func toggleNavAndTabBars(on: Bool) {
+        self.tabBarController?.tabBar.isHidden = on
+        self.navigationController?.navigationBar.isHidden = on
     }
 
     @IBAction func albumPressed(_ sender: Any) {
@@ -128,7 +144,10 @@ class MemeViewController: UIViewController {
     func save(memedImage: UIImage) {
         // Create the meme
         if checkMemeParameters() {
-            meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
+            let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memedImage: memedImage)
+            let object = UIApplication.shared.delegate
+            let appDelegate = object as! AppDelegate
+            appDelegate.memes.append(meme)
         }
     }
     
@@ -176,9 +195,15 @@ class MemeViewController: UIViewController {
                 }
                 
                 self.save(memedImage: self.memedImage)
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }
+    
+    @IBAction func cancelPressed(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
 }
 
 extension MemeViewController: UITextFieldDelegate {
@@ -213,4 +238,5 @@ extension MemeViewController: UINavigationControllerDelegate, UIImagePickerContr
         dismiss(animated: true, completion: nil)
     }
 }
+
 
