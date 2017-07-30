@@ -107,7 +107,7 @@ class MemeViewController: UIViewController {
         
         // check if view has already been repositioned
         // check if top textfield is currently being edited
-        if view.frame.origin.y == 0 && self.topTextField.isEditing {
+        if view.frame.origin.y == 0 && !self.topTextField.isEditing {
             view.frame.origin.y = getKeyboardHeight(notification) * (-1)
         }
     }
